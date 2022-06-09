@@ -5,7 +5,7 @@ import { Container, Label, TextInput } from "./styles";
 interface Props {
     placeHolder?: string;
     onChange: (data: string) => void;
-    value: string;
+    value?: string;
     style?: StyleProp<ViewStyle>
 }
 

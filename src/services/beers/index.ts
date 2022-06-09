@@ -15,7 +15,7 @@ interface FilterType {
 }
 
 export const BeersService = {
-  getBeersByFilters: async (page: number=1, perPage:number=25, filter: FilterType | null) => {
+  getBeersByFilters: async (page: number = 1, perPage: number = 25, filter: FilterType | null) => {
     try {
 
       let params: any = {};
@@ -30,13 +30,15 @@ export const BeersService = {
         if (filter.food)
           params.food = filter.food
 
-        params.page= page,
-        params.per_page= perPage
+      }
+      params.page = page,
+        params.per_page = perPage
+      console.log("param:", params)
+      const { data } = await api.get(`/beers`, {
+        params
+      });
 
-        }
-        const { data } = await api.get(`/beers`, {
-          params
-        });
+
 
       return {
         status: true,
