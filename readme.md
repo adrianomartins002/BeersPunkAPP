@@ -1,6 +1,8 @@
 # Good Beers
 Projeto para criação da solução para exibição das informações recuperadas da api
 
+![Tela1](https://i.imgur.com/NUtTJa5.png)
+![Tela2](https://i.imgur.com/t62StpS.png)
 
 # Iniciando
 Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em 

@@ -32,13 +32,5 @@ export const ContainerHeader = styled.View`
     align-items: flex-start;
 `;
 
-export const Title = styled.Text.attrs(({theme})=>({
-    color: theme.COLORS.TITLE
-}))`
-    font-size: 32px;
-    font-weight: bold;
-    color: #fff;
-    font-family: ${({theme})=> theme.FONTS.TITLE};
-    
-`;
+
 
