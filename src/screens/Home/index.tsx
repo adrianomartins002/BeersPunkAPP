@@ -1,28 +1,24 @@
 import {View, ListRenderItem } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { Container, ContainerHeader, ListBeers, Title } from './styles';
+import { Container, ContainerHeader, ListBeers } from './styles';
 import { BeersService } from '@services/beers/';
 import { CardBeer } from '@components/CardBeer';
 import { FilterText } from '@components/InputFilter';
 import { useBeerFilter } from '@hooks/advanced-filter';
+import { Title } from '@components/Title';
+import {BeerDetails} from '@src/@types/Beer';
 
-interface BeerDetails{
-    name: string;
-    id: number;
-    image_url: string;
-}
+
 
 
 export function Home() {
-    const [beersList, setBeersList] = useState([]);
+    const [beersList, setBeersList] = useState<BeerDetails[]>([]);
     const [page, setPage] = useState(1);
     const {beerFilter} = useBeerFilter();
 
 
     async function searchBeers(){
-        console.log("buscou", beerFilter);
         const dataBeersRequest = await BeersService.getBeersByFilters(page,25,beerFilter);
-        console.log("lista deixa ver:", dataBeersRequest.data.length);
         setBeersList(dataBeersRequest.data);
     }
 
@@ -34,7 +30,6 @@ export function Home() {
         searchBeers();
 
     },[])
-
 
     const renderBeerCard: ListRenderItem<BeerDetails> = ({ item }) => (
         <CardBeer
@@ -55,7 +50,7 @@ export function Home() {
     return (
         <Container>
             <ContainerHeader>
-                    <Title>Good Beers</Title>
+                    <Title title='Good Beers'/>
                     <FilterText />
             </ContainerHeader>
             <ListBeers
@@ -63,7 +58,7 @@ export function Home() {
                 renderItem={renderBeerCard}
                 ItemSeparatorComponent={()=><View style={{height: 20, width: 20}}/>}
                 numColumns={2}
-                key={item=>item.id}
+                // key={item=>item.id}
                 keyExtractor={item=>String(item.id)}
                 showsVerticalScrollIndicator={false}
                 //onEndReachedThreshold={0.2}

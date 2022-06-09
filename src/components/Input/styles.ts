@@ -3,12 +3,16 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     width: 100%;
-    height: 60px;
+    height: 55px;
     
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: flex-end;
+    border-width: 1px;
+    border-radius: 12px;
+    border-color: #CCC;
+    margin-bottom: 20px;
 
 `;
 
@@ -30,6 +34,5 @@ export const TextInput = styled.TextInput`
     height: 40px;
     font-size: 16px;
     color: black;
-    border-bottom-width: 1px;
-    border-bottom-color: #383838;
+    
 `;

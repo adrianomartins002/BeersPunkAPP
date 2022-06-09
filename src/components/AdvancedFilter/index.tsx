@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { ButtonApplyFilters, Container, ContainerFilter, FoodMatch, LineClose } from "./style"
+import { ButtonApplyFiltersContainer, ButtonApplyFiltersText, Container, ContainerFilter, FoodMatch, LineClose } from "./style"
 import Modal from "react-native-modal";
-import FastImage from "react-native-fast-image";
-import { InputFilterText } from "../InputFilter/styles";
+import {Title} from '@components/Title';
 import { Input } from "@components/Input";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useBeerFilter } from "@hooks/advanced-filter";
 
 interface Props {
@@ -56,12 +56,16 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
             <Container>
                 <LineClose onPress={() => setVisible(false)} />
                 <ContainerFilter>
-                    <Input label="Name:" onChange={setBeerName} value={beerName} />
-                    <Input label="Food Name:" onChange={setFoodName} value={foodName} />
-                    <Input label="ABV:" onChange={setAbvGt} value={abvGt} />
+                    <Title title="Advanced filter" style={{color: "#000", marginBottom: 20, fontSize: 28}}/>
+                    <Input placeHolder="Name" onChange={setBeerName} value={beerName} />
+                    <Input placeHolder="Food Name" onChange={setFoodName} value={foodName} />
+                    <Input placeHolder="ABV" onChange={setAbvGt} value={abvGt} />
                    
                 </ContainerFilter>
-                <ButtonApplyFilters title="Aplicar filtros" onPress={applyFilters} />
+                <ButtonApplyFiltersContainer onPress={applyFilters}>
+                    <ButtonApplyFiltersText>Apply filters</ButtonApplyFiltersText>
+                     <FontAwesome name="search" size={30} color={"#FFF"} />
+                </ButtonApplyFiltersContainer>
             </Container>
 
         </Modal>
