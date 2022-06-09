@@ -33,7 +33,8 @@ export const BeersService = {
       }
       params.page = page,
         params.per_page = perPage
-      console.log("param:", params)
+
+        
       const { data } = await api.get(`/beers`, {
         params
       });
