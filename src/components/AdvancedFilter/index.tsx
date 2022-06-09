@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonApplyFiltersContainer, ButtonApplyFiltersText, Container, ContainerFilter, FoodMatch, LineClose } from "./style"
 import Modal from "react-native-modal";
 import {Title} from '@components/Title';
@@ -19,7 +19,7 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
     const [beerName, setBeerName] = useState("");
     const [abvGt, setAbvGt] = useState("");
 
-    const { setBeerFilter } = useBeerFilter();
+    const { beerFilter, setBeerFilter } = useBeerFilter();
 
     const handlePlayIcon = () => {
         if (playIcon === true)
@@ -37,6 +37,18 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
 
         setVisible(false);
     }
+
+    useEffect(()=>{
+        if(beerFilter?.beer_name)
+            setBeerName(beerFilter.beer_name)
+
+        if(beerFilter?.food)
+            setFoodName(beerFilter?.food)
+
+        if(beerFilter?.abv_gt)
+            setAbvGt(String(beerFilter?.abv_gt));
+
+    },[])
 
     return (
         <Modal

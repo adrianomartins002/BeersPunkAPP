@@ -39,6 +39,8 @@ export function Home() {
     useEffect(()=>{
         if(beerFilter !== null)
             searchBeers(true)
+        else
+            searchBeers()
     },[beerFilter, page])
 
     useEffect(()=>{
@@ -52,6 +54,9 @@ export function Home() {
           id={item.id}
           name={item.name}
           image={item.image_url}
+          tagline={item.tagline}
+          abv={item.abv}
+          backgroundColor={item.backgroundColor}
         />
       );
 
@@ -79,6 +84,9 @@ export function Home() {
         };
       });
 
+
+    console.log("tamanho:", beersList.length)
+
     return (
         <Container>
             <ContainerHeader>
@@ -88,8 +96,8 @@ export function Home() {
             <ListBeers
                 data={beersList}
                 renderItem={renderBeerCard}
-                ItemSeparatorComponent={()=><View style={{height: 20, width: 20}}/>}
-                numColumns={2}
+                // ItemSeparatorComponent={()=><View style={{height: 20, width: 20}}/>}
+                numColumns={1}
                 // key={item=>item.id}
                 keyExtractor={item=>String(item.id)}
                 showsVerticalScrollIndicator={false}
