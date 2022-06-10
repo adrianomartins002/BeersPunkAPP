@@ -9,8 +9,8 @@ export const Container = styled.View`
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    border-width: 1px;
     border-radius: 12px;
+    border-width: 1px;
     border-color: #CCC;
     margin-bottom: 20px;
 
@@ -27,6 +27,7 @@ export const Label = styled.Text`
     display: flex;
     padding-top: 10px;
     font-family: ${({theme})=> theme.FONTS.SUBTITLE};
+    
 `;
 
 export const TextInput = styled.TextInput`

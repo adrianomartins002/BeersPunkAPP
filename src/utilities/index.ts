@@ -1,5 +1,7 @@
 
 import { BeerDetails } from '@src/@types/Beer';
+import theme from '../theme/index';
+
 
 export function returnListOfBeersNoDuplications(beerList: BeerDetails[]){
     
@@ -12,7 +14,7 @@ export function returnListOfBeersNoDuplications(beerList: BeerDetails[]){
 
             newList.push({
                 ...beerDetail,
-                backgroundColor: isBackgroundMain? "#383838": "#232324"
+                backgroundColor: isBackgroundMain? theme.COLORS.BACKGROUND : theme.COLORS.BACKGROUND_SECONDARY
             });
         
             isBackgroundMain = !isBackgroundMain;

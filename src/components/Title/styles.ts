@@ -5,7 +5,7 @@ export const Title = styled.Text.attrs(({theme})=>({
 }))`
     font-size: 32px;
     font-weight: bold;
-    color: #fff;
+    color: ${({theme})=>theme.COLORS.TITLE};
     font-family: ${({theme})=> theme.FONTS.TITLE};
     
 `;
