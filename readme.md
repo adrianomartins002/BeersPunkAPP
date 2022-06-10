@@ -1,10 +1,11 @@
 # Good Beers
 Projeto para criação da solução para exibição das informações recuperadas da api
-
+<div float="left">
 <img src="https://i.imgur.com/D1Jt0EM.png" alt="drawing" width="200"/>
 <img src="https://i.imgur.com/PGPXD8L.png" alt="drawing" width="200"/>
 <img src="https://i.imgur.com/nYz0kyc.png" alt="drawing" width="200"/>
 <img src="https://im2.ezgif.com/tmp/ezgif-2-402a0d2fc3.gif" alt="drawing" width="200"/>
+</div>
 
 
 # Iniciando
