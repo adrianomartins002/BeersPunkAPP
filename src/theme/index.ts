@@ -1,7 +1,12 @@
 export default {
     COLORS: {
-      BACKGROUND_SECONDARY: '#383838',
-      BACKGROUND: '#242323',
+      // BACKGROUND_SECONDARY: '#383838',
+      // BACKGROUND: '#242323',
+      // BACKGROUND: '#f5f3f2',
+      // BACKGROUND_SECONDARY: "#FFF",
+      BACKGROUND: "#FFF",
+      BACKGROUND_SECONDARY: "#FFF",
+
   
       PRIMARY_900: '#f0a835',
       PRIMARY_800: '#a66805',
@@ -20,7 +25,8 @@ export default {
       ALERT_50: '#F3EFE5',
   
       SHAPE: '#DCDCDC',
-      TITLE: '#FFF',
+      TITLE: '#242424',
+      SUBTITLE: '#3d3d3d',
   
       GRADIENT: ['#B83341', '#E03F50'],
     },

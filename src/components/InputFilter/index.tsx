@@ -22,8 +22,8 @@ export function FilterText({
     return (
         <Container>
             <Input placeHolder='Beer name' value={value} onChange={onChange} style={{width: "84%", backgroundColor: "#FFF"}}/>
-            <TouchableOpacity onPress={() => setAdvancedFilterVisible(true)} style={{paddingBottom: 14,}}>
-                <FontAwesome name="filter" size={35} color={"#FFF"} />
+            <TouchableOpacity onPress={() => setAdvancedFilterVisible(true)} >
+                <FontAwesome name="filter" size={35} color={"#000"} style={{marginBottom: 10}}/>
             </TouchableOpacity>
             <AdvancedFilter visible={advancedFilterVisible} setVisible={setAdvancedFilterVisible} />
         </Container>

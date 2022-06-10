@@ -7,5 +7,7 @@ export interface BeerDetails{
     image_url: string;
     abv?: number;
     ibu?: number;
+    ph?: number;
     backgroundColor?: string;
+
 }
