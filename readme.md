@@ -1,8 +1,12 @@
 # Good Beers
 Projeto para criação da solução para exibição das informações recuperadas da api
+<div float="left">
+<img src="https://i.imgur.com/D1Jt0EM.png" alt="drawing" width="200"/>
+<img src="https://i.imgur.com/PGPXD8L.png" alt="drawing" width="200"/>
+<img src="https://i.imgur.com/nYz0kyc.png" alt="drawing" width="200"/>
+<img src="https://im2.ezgif.com/tmp/ezgif-2-402a0d2fc3.gif" alt="drawing" width="200"/>
+</div>
 
-![Tela1](https://i.imgur.com/NUtTJa5.png)
-![Tela2](https://i.imgur.com/t62StpS.png)
 
 # Iniciando
 Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em 
