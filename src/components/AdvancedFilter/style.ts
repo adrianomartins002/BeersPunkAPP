@@ -45,7 +45,7 @@ export const ButtonApplyFiltersContainer = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: ${({theme})=>theme.COLORS.BACKGROUND};
+    background-color: ${({theme})=>theme.COLORS.TITLE};
     border-radius: 40px;
 `;
 

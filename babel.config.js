@@ -17,7 +17,8 @@ module.exports = {
           '@components' : './src/components',
           '@screens' : './src/screens',
           '@hooks' : './src/hooks',
-          '@services': './src/services'
+          '@services': './src/services',
+          '@routes' : './src/routes',
         }
       }
     ]

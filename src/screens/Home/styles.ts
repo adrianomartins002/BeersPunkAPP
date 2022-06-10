@@ -1,5 +1,4 @@
 import styled , {css}from 'styled-components/native';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { FlatList, FlatListProps } from 'react-native';
 
 interface BeerDetails{
@@ -8,17 +7,15 @@ interface BeerDetails{
     image_url: string;
 }
 
-export const Container = styled.View.attrs(({theme})=>({
-    backgroundColor: theme.COLORS.BACKGROUND
-}))`
+export const Container = styled.View`
     flex:1;
     justify-content: center;  
-    padding-top: 80px;
+    padding-top: 60px;
+    background-color: ${({theme})=> theme.COLORS.BACKGROUND};
 `;
 
 export const ListBeers = styled(FlatList as new (props: FlatListProps<BeerDetails>) => FlatList<BeerDetails>)`
-    flex: 1;
-      
+          
 `;
 
 export const ContainerHeader = styled.View`
