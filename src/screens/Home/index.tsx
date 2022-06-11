@@ -5,12 +5,12 @@ import { BeersService } from '@services/beers/';
 import { CardBeer } from '@components/CardBeer';
 import { FilterText } from '@components/InputFilter';
 import { useBeerFilter } from '@hooks/advanced-filter';
-import { Title } from '@components/Title';
 import { BeerDetails } from '@src/@types/Beer';
 import debounce from 'lodash.debounce';
 import { returnListOfBeersNoDuplications } from '../../utilities/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import TitleBigger from '../../components/Atomics/TitleBigger';
 
 type RootStackParamList = {
     BeerDetails: {
@@ -123,7 +123,7 @@ export function Home() {
                 numColumns={1}
                 ListHeaderComponent={
                         <ContainerHeader>
-                            <Title title='Good Beers' />
+                            <TitleBigger>Good Beers</TitleBigger>
                             <FilterText onChange={debounceResults} />
                         </ContainerHeader>
                     }

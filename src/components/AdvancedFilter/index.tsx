@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ButtonApplyFiltersContainer, ButtonApplyFiltersText, Container, ContainerFilter, FoodMatch, LineClose } from "./style"
 import Modal from "react-native-modal";
-import {Title} from '@components/Title';
+import TitleBigger from "../Atomics/TitleBigger";
 import { Input } from "@components/Input";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useBeerFilter } from "@hooks/advanced-filter";
@@ -68,7 +68,7 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
             <Container>
                 <LineClose onPress={() => setVisible(false)} />
                 <ContainerFilter>
-                    <Title title="Advanced filter" style={{color: "#000", marginBottom: 20, fontSize: 28}}/>
+                    <TitleBigger >Advanced filter</TitleBigger>
                     <Input placeHolder="Name" onChange={setBeerName} value={beerName} />
                     <Input placeHolder="Food Name" onChange={setFoodName} value={foodName} />
                     <Input placeHolder="ABV" onChange={setAbvGt} value={abvGt} />
