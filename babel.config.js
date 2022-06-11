@@ -19,6 +19,7 @@ module.exports = {
           '@hooks' : './src/hooks',
           '@services': './src/services',
           '@routes' : './src/routes',
+          '@utilities' : './src/utilities',
         }
       }
     ]

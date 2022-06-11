@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, InputFilterText } from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { AdvancedFilter } from '../AdvancedFilter';
 import {Input} from '@components/Input';
@@ -12,7 +12,6 @@ interface Props{
 }
 
 export function FilterText({
-    value,
     onChange
 
 }:Props) {
@@ -21,7 +20,7 @@ export function FilterText({
 
     return (
         <Container>
-            <Input placeHolder='Beer name' value={value} onChange={onChange} style={{width: "84%", backgroundColor: "#FFF"}}/>
+            <Input testId="InputFilter" placeHolder='Beer name' onChange={onChange} style={{width: "84%", backgroundColor: "#FFF"}}/>
             <TouchableOpacity onPress={() => setAdvancedFilterVisible(true)} >
                 <FontAwesome name="filter" size={35} color={"#000"} style={{marginBottom: 10}}/>
             </TouchableOpacity>
