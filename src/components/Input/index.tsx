@@ -6,10 +6,11 @@ interface Props {
     placeHolder?: string;
     onChange: (data: string) => void;
     value?: string;
-    style?: StyleProp<ViewStyle>
+    style?: StyleProp<ViewStyle>,
+    testId?: string;
 }
 
-export function Input({  onChange, value, placeHolder, style }: Props) {
+export function Input({ testId, onChange, value, placeHolder, style }: Props) {
 
     const onChangeEvent = (e: NativeSyntheticEvent<TextInputChangeEventData>): void => {
         const value = e.nativeEvent.text;
@@ -18,7 +19,7 @@ export function Input({  onChange, value, placeHolder, style }: Props) {
 
     return (
         <Container style={style}>
-            <TextInput onChange={onChangeEvent} value={value} placeholder={placeHolder} />
+            <TextInput testID={testId} onChange={onChangeEvent} value={value} placeholder={placeHolder} />
         </Container>
     )
 }

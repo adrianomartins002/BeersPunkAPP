@@ -34,7 +34,7 @@ export function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
 
-    async function searchBeers(clearList?: boolean) {
+    async function searchBeers(clearList=true) {
         setLoading(true);
         const dataBeersRequest = await BeersService.getBeersByFilters(page, 10, beerFilter);
 
@@ -49,16 +49,13 @@ export function Home() {
         setLoading(false);
     }
 
-    async function searchBeersFilter() { }
-
+    useEffect(() => {
+        searchBeers(false);
+    }, [page])
 
     useEffect(() => {
-        console.log("deixa ver os filtros:", beerFilter)
-        if (beerFilter !== null)
-            searchBeers(true)
-        else
-            searchBeers()
-    }, [beerFilter, page])
+        searchBeers();
+    }, [beerFilter])
 
     useEffect(() => {
         searchBeers();
@@ -80,6 +77,7 @@ export function Home() {
         />
     );
 
+
     const fetchMoreData = async () => {
         setPage(page + 1)
 
@@ -92,13 +90,19 @@ export function Home() {
     function onChangeBeerName(value: string) {
         setPage(1);
         setBeerName(value)
-        setBeerFilter({
-            ...beerFilter,
-            beer_name: value
-        })
+        if (value === "") {
 
-        if (value === "")
             setBeerFilter(null);
+        } else {
+
+
+            setBeerFilter({
+                ...beerFilter,
+                beer_name: value
+            })
+
+        }
+
     }
 
     useEffect(() => {
@@ -106,34 +110,36 @@ export function Home() {
             debounceResults.cancel();
         };
     });
-    
-    console.log("tamanho da lista:", beersList.length);
+
+
 
     return (
 
         <Container>
-            <ContainerHeader>
-                <Title title='Good Beers' />
-                <FilterText onChange={debounceResults} />
-            </ContainerHeader>
-
             <ListBeers
                 data={beersList}
                 renderItem={renderBeerCard}
-                ItemSeparatorComponent={()=><View style={{height: 20, width: 20}}/>}
+                ItemSeparatorComponent={() => <View style={{ height: 20, width: 20 }} />}
                 numColumns={1}
-                // key={item=>item.id}
+                ListHeaderComponent={
+                        <ContainerHeader>
+                            <Title title='Good Beers' />
+                            <FilterText onChange={debounceResults} />
+                        </ContainerHeader>
+                    }
+                stickyHeaderIndices={[0]}
+                maxToRenderPerBatch={10}
                 keyExtractor={item => String(item.id)}
                 showsVerticalScrollIndicator={false}
                 onEndReachedThreshold={0.2}
-                onEndReached={({distanceFromEnd})=>{
-                    if(distanceFromEnd <0 ){
+                onEndReached={({ distanceFromEnd }) => {
+                    if (distanceFromEnd < 0) {
                         return
                     }
                     fetchMoreData()
                 }}
-                style={{paddingTop: 10}}
-                ListFooterComponent={loading? <ActivityIndicator /> : null}
+
+                ListFooterComponent={loading ? <ActivityIndicator /> : null}
             />
 
         </Container>
