@@ -1,6 +1,6 @@
 import React from 'react';
 import { NativeSyntheticEvent, TextInputChangeEventData, StyleProp, ViewStyle } from "react-native";
-import { Container, Label, TextInput } from "./styles";
+import { Container, TextInput } from "./styles";
 
 interface Props {
     placeHolder?: string;
@@ -10,7 +10,7 @@ interface Props {
     testId?: string;
 }
 
-export function Input({ testId, onChange, value, placeHolder, style }: Props) {
+export function Input({ onChange, value, placeHolder, style }: Props) {
 
     const onChangeEvent = (e: NativeSyntheticEvent<TextInputChangeEventData>): void => {
         const value = e.nativeEvent.text;
@@ -19,7 +19,7 @@ export function Input({ testId, onChange, value, placeHolder, style }: Props) {
 
     return (
         <Container style={style}>
-            <TextInput testID={testId} onChange={onChangeEvent} value={value} placeholder={placeHolder} />
+            <TextInput testID="TextInput" onChange={onChangeEvent} value={value} placeholder={placeHolder} />
         </Container>
     )
 }

@@ -1,12 +1,7 @@
 export default {
     COLORS: {
-      // BACKGROUND_SECONDARY: '#383838',
-      // BACKGROUND: '#242323',
-      // BACKGROUND: '#f5f3f2',
-      // BACKGROUND_SECONDARY: "#FFF",
-      BACKGROUND: "#FFF",
-      BACKGROUND_SECONDARY: "#FFF",
 
+      BACKGROUND: "#FFF",
   
       PRIMARY_900: '#f0a835',
       PRIMARY_800: '#a66805',
