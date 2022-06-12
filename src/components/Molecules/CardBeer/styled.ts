@@ -2,14 +2,14 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
     flex: 1;
-    height: 170px;
+    height: 180px;
     /* border-radius: 14px; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding-left: 20px;
-    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_SECONDARY};
+    /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND}; */
 `;
 
 export const ContainerImage = styled.View`

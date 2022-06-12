@@ -24,7 +24,7 @@ export const CardBeer = React.memo(({
 }: Props) => {
     const tileBeer = name.length > 20 ? name.substring(0, 20) + "..." : name;
     return (
-        <Container style={{ backgroundColor: backgroundColor }} onPress={onPress}>
+        <Container testID="CardBeer" style={{ backgroundColor: backgroundColor }} onPress={onPress}>
             
             <ContainerImage style={{
                 

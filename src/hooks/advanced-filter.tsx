@@ -5,6 +5,7 @@ interface BeerFilter {
     food: string;
     beer_name: string;
     abv_gt: number;
+    order_by: "name" | "abv" 
 }
 
 interface BeerFilterContextType {

@@ -19,7 +19,7 @@ export const ListBeers = styled(FlatList as new (props: FlatListProps<BeerDetail
 
 export const ContainerHeader = styled.View`
     width: 100%;
-    height: 180px;
+    height: 230px;
     padding-left: 30px;
     padding-right: 20px;
     flex-direction: column;
