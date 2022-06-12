@@ -1,16 +1,18 @@
-import { View, ListRenderItem, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, ListRenderItem, ActivityIndicator, SafeAreaView, StyleProp, TextStyle } from 'react-native';
 import React, { useState, useEffect, useMemo } from 'react';
 import { Container, ContainerHeader, ListBeers } from './styles';
 import { BeersService } from '@services/beers/';
-import { CardBeer } from '@components/CardBeer';
-import { FilterText } from '@components/InputFilter';
+import { CardBeer } from '@components/Molecules/CardBeer';
+import { FilterText } from '@components/Molecules/InputFilter';
 import { useBeerFilter } from '@hooks/advanced-filter';
-import { Title } from '@components/Title';
 import { BeerDetails } from '@src/@types/Beer';
 import debounce from 'lodash.debounce';
 import { returnListOfBeersNoDuplications } from '../../utilities/index';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import TitleBigger from '../../components/Atomics/Title';
+import { NoNetworkConnection } from '@components/Molecules/NoNetworkConnection';
+import RadioGroup from '@components/Molecules/RadioGroup';
 
 type RootStackParamList = {
     BeerDetails: {
@@ -25,25 +27,32 @@ type RootStackParamList = {
     };
 };
 
+
+
 export function Home() {
     const [beersList, setBeersList] = useState<BeerDetails[]>([]);
     const [loading, setLoading] = useState(false);
     const [beerName, setBeerName] = useState("");
+    const [orderListBy, setOrderListBy] = useState<"Name"|"ABV">("Name");
     const [page, setPage] = useState(1);
     const { beerFilter, setBeerFilter } = useBeerFilter();
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
 
-    async function searchBeers(clearList=true) {
+    async function searchBeers(clearList = true) {
         setLoading(true);
         const dataBeersRequest = await BeersService.getBeersByFilters(page, 10, beerFilter);
+        
 
         if (dataBeersRequest.data.length > 0) {
-            let list = returnListOfBeersNoDuplications(dataBeersRequest.data)
+            let list = returnListOfBeersNoDuplications(dataBeersRequest.data, orderListBy)
+
             if (clearList)
                 setBeersList(list)
             else
-                setBeersList(returnListOfBeersNoDuplications([...beersList, ...dataBeersRequest.data]))
+                setBeersList(returnListOfBeersNoDuplications([...beersList, ...dataBeersRequest.data], orderListBy))
+        }else{
+            setBeersList([]);
         }
 
         setLoading(false);
@@ -55,7 +64,7 @@ export function Home() {
 
     useEffect(() => {
         searchBeers();
-    }, [beerFilter])
+    }, [beerFilter, orderListBy])
 
     useEffect(() => {
         searchBeers();
@@ -112,21 +121,27 @@ export function Home() {
     });
 
 
-
     return (
 
         <Container>
+            <NoNetworkConnection />
             <ListBeers
                 data={beersList}
                 renderItem={renderBeerCard}
-                ItemSeparatorComponent={() => <View style={{ height: 20, width: 20 }} />}
+                ItemSeparatorComponent={() => <View style={styleAdd.styleItemSeparator} />}
                 numColumns={1}
                 ListHeaderComponent={
-                        <ContainerHeader>
-                            <Title title='Good Beers' />
-                            <FilterText onChange={debounceResults} />
-                        </ContainerHeader>
-                    }
+                    <ContainerHeader>
+                        <TitleBigger size='large'>Good Beers</TitleBigger>
+                        <FilterText onChange={debounceResults} isAdvancedFilterActive={
+                            (beerFilter != null && (beerFilter.beer_name != "" || beerFilter?.food != ""))}/>
+                        <RadioGroup 
+                        onChange={(item:"Name"|"ABV")=>{ setOrderListBy(item)}}
+                        options={["Name", "ABV"]}
+                        activeButton={orderListBy}
+                        />
+                    </ContainerHeader>
+                }
                 stickyHeaderIndices={[0]}
                 maxToRenderPerBatch={10}
                 keyExtractor={item => String(item.id)}
@@ -138,11 +153,24 @@ export function Home() {
                     }
                     fetchMoreData()
                 }}
-
+                ListEmptyComponent={
+                    <Container>
+                        <TitleBigger style={styleListEmpty}>Lista de itens vazia</TitleBigger>
+                    </Container>
+                }
                 ListFooterComponent={loading ? <ActivityIndicator /> : null}
             />
 
         </Container>
 
     );
+}
+
+const styleListEmpty:StyleProp<TextStyle> = {textAlign: "center"};
+
+const styleAdd = {
+    styleListEmpty:{
+        textAlign: "center"
+    },
+    styleItemSeparator:{ height: 20, width: 20 }
 }

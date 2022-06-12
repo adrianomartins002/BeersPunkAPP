@@ -39,7 +39,7 @@ export const FoodMatch = styled.TextInput`
 `;
 
 export const ButtonApplyFiltersContainer = styled.TouchableOpacity`
-    width: 70%;
+    width: 100%;
     height: 60px;   
     display: flex;
     flex-direction: row;

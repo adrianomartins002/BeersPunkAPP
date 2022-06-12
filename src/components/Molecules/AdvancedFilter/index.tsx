@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ButtonApplyFiltersContainer, ButtonApplyFiltersText, Container, ContainerFilter, FoodMatch, LineClose } from "./style"
 import Modal from "react-native-modal";
-import {Title} from '@components/Title';
-import { Input } from "@components/Input";
+import { Input } from "@components/Atomics/TextInput";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useBeerFilter } from "@hooks/advanced-filter";
+import Title from "@components/Atomics/Title";
+import {Slider} from '@miblanchard/react-native-slider';
+import Label from "@components/Atomics/Label";
 
 interface Props {
     visible: boolean;
@@ -17,7 +19,7 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
 
     const [foodName, setFoodName] = useState("");
     const [beerName, setBeerName] = useState("");
-    const [abvGt, setAbvGt] = useState("");
+    const [abvGt, setAbvGt] = useState<number>(0.1);
 
     const { beerFilter, setBeerFilter } = useBeerFilter();
 
@@ -46,7 +48,7 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
             setFoodName(beerFilter?.food)
 
         if(beerFilter?.abv_gt)
-            setAbvGt(String(beerFilter?.abv_gt));
+            setAbvGt(beerFilter?.abv_gt);
 
     },[])
 
@@ -64,20 +66,30 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
             }}
             animationOutTiming={800}
             animationInTiming={800}
+            testID="AdvancedFilter"
         >
-            <Container>
+            
+            <Container >
                 <LineClose onPress={() => setVisible(false)} />
                 <ContainerFilter>
-                    <Title title="Advanced filter" style={{color: "#000", marginBottom: 20, fontSize: 28}}/>
+                    <Title size="medium">Advanced filter</Title>
                     <Input placeHolder="Name" onChange={setBeerName} value={beerName} />
                     <Input placeHolder="Food Name" onChange={setFoodName} value={foodName} />
-                    <Input placeHolder="ABV" onChange={setAbvGt} value={abvGt} />
+                    <Label size="medium">Abv maior que:</Label>
+                    <Label>{String(abvGt)}</Label>
+                    <Slider
+                    value={abvGt}
+                    onValueChange={value => setAbvGt(Number(Number(value).toFixed(2)))}
+                    maximumValue={10}
+
+                    
+                />
                    
-                </ContainerFilter>
                 <ButtonApplyFiltersContainer onPress={applyFilters}>
                     <ButtonApplyFiltersText>Apply filters</ButtonApplyFiltersText>
                      <FontAwesome name="search" size={30} color={"#FFF"} />
                 </ButtonApplyFiltersContainer>
+                </ContainerFilter>
             </Container>
 
         </Modal>
