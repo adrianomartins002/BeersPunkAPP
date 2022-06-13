@@ -14,12 +14,15 @@ interface Props {
 
 }
 
+const INITIAL_ABV = 0.1;
+const MAXIMUM_ABV = 10;
+
 export function AdvancedFilter({ visible, setVisible }: Props) {
     const [playIcon, setPlayIcon] = useState(true);
 
     const [foodName, setFoodName] = useState("");
     const [beerName, setBeerName] = useState("");
-    const [abvGt, setAbvGt] = useState<number>(0.1);
+    const [abvGt, setAbvGt] = useState<number>(INITIAL_ABV);
 
     const { beerFilter, setBeerFilter } = useBeerFilter();
 
@@ -75,12 +78,12 @@ export function AdvancedFilter({ visible, setVisible }: Props) {
                     <Title size="medium">Advanced filter</Title>
                     <Input placeHolder="Name" onChange={setBeerName} value={beerName} />
                     <Input placeHolder="Food Name" onChange={setFoodName} value={foodName} />
-                    <Label size="medium">Abv maior que:</Label>
+                    <Label size="medium">Abv greater than:</Label>
                     <Label>{String(abvGt)}</Label>
                     <Slider
                     value={abvGt}
                     onValueChange={value => setAbvGt(Number(Number(value).toFixed(2)))}
-                    maximumValue={10}
+                    maximumValue={MAXIMUM_ABV}
 
                     
                 />

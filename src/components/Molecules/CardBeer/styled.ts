@@ -1,15 +1,13 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
-    flex: 1;
+    width: 100%;
     height: 180px;
-    /* border-radius: 14px; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding-left: 20px;
-    /* background-color: ${({ theme }) => theme.COLORS.BACKGROUND}; */
 `;
 
 export const ContainerImage = styled.View`
@@ -17,11 +15,11 @@ export const ContainerImage = styled.View`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 170px;
+    height: 160px;
     width: 25%;
-    padding: 40px;
+    /* padding: 40px; */
     border-radius: 14px;
-    background-color: #FFF ;
+    background-color: ${({theme})=>theme.COLORS.BACKGROUND} ;
 `;
 
 

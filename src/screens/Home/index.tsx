@@ -27,13 +27,14 @@ type RootStackParamList = {
     };
 };
 
-
+const NUMBER_ITEMS_PER_TIME = 10;
+const ITEM_HEIGHT_CARD_BEER = 180;
 
 export function Home() {
     const [beersList, setBeersList] = useState<BeerDetails[]>([]);
     const [loading, setLoading] = useState(false);
     const [beerName, setBeerName] = useState("");
-    const [orderListBy, setOrderListBy] = useState<"Name"|"ABV">("Name");
+    const [orderListBy, setOrderListBy] = useState<"Name" | "ABV">("Name");
     const [page, setPage] = useState(1);
     const { beerFilter, setBeerFilter } = useBeerFilter();
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -41,8 +42,8 @@ export function Home() {
 
     async function searchBeers(clearList = true) {
         setLoading(true);
-        const dataBeersRequest = await BeersService.getBeersByFilters(page, 10, beerFilter);
-        
+        const dataBeersRequest = await BeersService.getBeersByFilters(page, NUMBER_ITEMS_PER_TIME, beerFilter);
+
 
         if (dataBeersRequest.data.length > 0) {
             let list = returnListOfBeersNoDuplications(dataBeersRequest.data, orderListBy)
@@ -51,7 +52,7 @@ export function Home() {
                 setBeersList(list)
             else
                 setBeersList(returnListOfBeersNoDuplications([...beersList, ...dataBeersRequest.data], orderListBy))
-        }else{
+        } else {
             setBeersList([]);
         }
 
@@ -125,6 +126,7 @@ export function Home() {
 
         <Container>
             <NoNetworkConnection />
+            
             <ListBeers
                 data={beersList}
                 renderItem={renderBeerCard}
@@ -134,17 +136,26 @@ export function Home() {
                     <ContainerHeader>
                         <TitleBigger size='large'>Good Beers</TitleBigger>
                         <FilterText onChange={debounceResults} isAdvancedFilterActive={
-                            (beerFilter != null && (beerFilter.beer_name != "" || beerFilter?.food != ""))}/>
-                        <RadioGroup 
-                        onChange={(item:"Name"|"ABV")=>{ setOrderListBy(item)}}
-                        options={["Name", "ABV"]}
-                        activeButton={orderListBy}
+                            (beerFilter != null && (beerFilter.beer_name != "" || beerFilter?.food != ""))} />
+                        <RadioGroup
+                            onChange={(item: "Name" | "ABV") => { setOrderListBy(item) }}
+                            options={["Name", "ABV"]}
+                            activeButton={orderListBy}
                         />
                     </ContainerHeader>
                 }
                 stickyHeaderIndices={[0]}
-                maxToRenderPerBatch={10}
+                maxToRenderPerBatch={NUMBER_ITEMS_PER_TIME}
                 keyExtractor={item => String(item.id)}
+                getItemLayout={(data, index) => {
+                    
+                        return {
+                            length: ITEM_HEIGHT_CARD_BEER,
+                            offset: ITEM_HEIGHT_CARD_BEER * (data? data.length : 0),
+                            index,
+                        };
+                   
+                }}
                 showsVerticalScrollIndicator={false}
                 onEndReachedThreshold={0.2}
                 onEndReached={({ distanceFromEnd }) => {
@@ -166,11 +177,11 @@ export function Home() {
     );
 }
 
-const styleListEmpty:StyleProp<TextStyle> = {textAlign: "center"};
+const styleListEmpty: StyleProp<TextStyle> = { textAlign: "center" };
 
 const styleAdd = {
-    styleListEmpty:{
+    styleListEmpty: {
         textAlign: "center"
     },
-    styleItemSeparator:{ height: 20, width: 20 }
+    styleItemSeparator: { height: 20, width: 20 }
 }
